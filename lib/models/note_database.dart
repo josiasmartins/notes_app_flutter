@@ -22,6 +22,9 @@ class NoteDataBase extends ChangeNotifier {
 
     // save to db
     await isar.writeTxn(() => isar.notes.put(newNote));
+
+    // re-read from db
+    fetchNotes();
   }
 
   // READ - notes from db
@@ -45,5 +48,6 @@ class NoteDataBase extends ChangeNotifier {
   // DELETE - a note from the db
   Future<void> deleteNotes(int id) async {
     await isar.writeTxn(() => isar.notes.delete(id));
+    await fetchNotes();
   }
 }
