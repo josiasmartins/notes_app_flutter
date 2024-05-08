@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 import "./models/note_database.dart";
 import "./pages/note_page.dart";
@@ -9,10 +10,18 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NoteDataBase.initialize();
 
-  runApp(ChangeNotifierProvider(
-    create: (context) => NoteDataBase(),
-    child: const MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        // Note provider
+        ChangeNotifierProvider(create: (context) => NoteDataBase()),
+
+        // Theme provider
+        ChangeNotifierProvider(create: (context) => ThemeProvider())
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

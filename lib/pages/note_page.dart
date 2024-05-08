@@ -24,26 +24,27 @@ class _NotePageState extends State<NotePage> {
   // create a note
   void createNote() {
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              content: TextField(
-                controller: textController,
-              ),
-              actions: [
-                MaterialButton(
-                  onPressed: () {
-                    context.read<NoteDataBase>().addNotes(textController.text);
+      context: context,
+      builder: (context) => AlertDialog(
+        content: TextField(
+          controller: textController,
+        ),
+        actions: [
+          MaterialButton(
+            onPressed: () {
+              context.read<NoteDataBase>().addNotes(textController.text);
 
-                    // celar controller
-                    textController.clear();
+              // celar controller
+              textController.clear();
 
-                    // pop dialog box
-                    Navigator.pop(context);
-                  },
-                  child: const Text("Create"),
-                )
-              ],
-            ));
+              // pop dialog box
+              Navigator.pop(context);
+            },
+            child: const Text("Create"),
+          ),
+        ],
+      ),
+    );
   }
 
   // read notes
