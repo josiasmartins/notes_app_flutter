@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import "./models/note_database.dart";
+import "./pages/note_page.dart";
 
 void main() async {
   // initialize note isar database
@@ -8,7 +9,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NoteDataBase.initialize();
 
-  runApp(ChangeNotifierProvider(create: (context) => NoteDataBase()));
+  runApp(ChangeNotifierProvider(
+    create: (context) => NoteDataBase(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: NotesPage(),
+      home: NotePage(),
     );
   }
 }
