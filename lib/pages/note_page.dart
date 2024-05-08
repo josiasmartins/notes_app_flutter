@@ -53,6 +53,7 @@ class _NotePageState extends State<NotePage> {
 
   // upload a note
   void updateNote(Note note) {
+    // pre-fill the current note text
     textController.text = note.text;
     showDialog(
         context: context,
@@ -64,12 +65,12 @@ class _NotePageState extends State<NotePage> {
                 MaterialButton(
                   onPressed: () {
                     // update note in db
-
                     context
                         .read<NoteDataBase>()
                         .updateNote(note.id, textController.text);
-
+                    // clear controller
                     textController.clear();
+                    // pop dialog box
                     Navigator.pop(context);
                   },
                   child: const Text("Update"),
@@ -101,7 +102,7 @@ class _NotePageState extends State<NotePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => createNote(),
+        onPressed: createNote,
         child: Icon(Icons.add),
       ),
       body: ListView.builder(
