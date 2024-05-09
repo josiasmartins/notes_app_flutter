@@ -14,14 +14,19 @@ class ThemeProvider with ChangeNotifier {
   // setter method to set new theme
   set themeData(ThemeData themeData) {
     _themeData = themeData;
+    notifyListeners();
   }
 
   // we will use this toggle in a switch later on..
-  void toggleTheme() {
+  void toggleTheme(value) {
+    print(value);
+
     if (_themeData == lightMode) {
       themeData = darkMode;
     } else {
       themeData = lightMode;
     }
+
+    // notifyListeners();
   }
 }
