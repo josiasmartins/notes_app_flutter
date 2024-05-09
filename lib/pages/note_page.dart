@@ -29,6 +29,7 @@ class _NotePageState extends State<NotePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: Theme.of(context).colorScheme.background,
         content: TextField(
           controller: textController,
         ),
@@ -60,27 +61,29 @@ class _NotePageState extends State<NotePage> {
     // pre-fill the current note text
     textController.text = note.text;
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: const Text("Update Note"),
-              content: TextField(controller: textController),
-              actions: [
-                // update button
-                MaterialButton(
-                  onPressed: () {
-                    // update note in db
-                    context
-                        .read<NoteDataBase>()
-                        .updateNote(note.id, textController.text);
-                    // clear controller
-                    textController.clear();
-                    // pop dialog box
-                    Navigator.pop(context);
-                  },
-                  child: const Text("Update"),
-                )
-              ],
-            ));
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        title: const Text("Update Note"),
+        content: TextField(controller: textController),
+        actions: [
+          // update button
+          MaterialButton(
+            onPressed: () {
+              // update note in db
+              context
+                  .read<NoteDataBase>()
+                  .updateNote(note.id, textController.text);
+              // clear controller
+              textController.clear();
+              // pop dialog box
+              Navigator.pop(context);
+            },
+            child: const Text("Update"),
+          ),
+        ],
+      ),
+    );
   }
 
   // delete a note
@@ -110,7 +113,11 @@ class _NotePageState extends State<NotePage> {
       backgroundColor: Theme.of(context).colorScheme.background,
       floatingActionButton: FloatingActionButton(
         onPressed: createNote,
-        child: Icon(Icons.add),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).colorScheme.inversePrimary,
+        ),
       ),
       drawer: const MyDrawer(),
       body: Column(

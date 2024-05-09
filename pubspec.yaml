@@ -40,6 +40,7 @@ dependencies:
   path_provider: ^2.1.3
   provider: ^6.1.2
   google_fonts: ^6.2.1
+  popover: ^0.3.0
   # build_runner: ^2.4.9
 
 dev_dependencies:
