@@ -15,5 +15,8 @@ flutter build apk --release
 
 
 #### Credits By
-[Mitch Koko](https://www.youtube.com/watch?v=NuSb0wq9K-I&t=1454s)### Download do APK
+[Mitch Koko](https://www.youtube.com/watch?v=NuSb0wq9K-I&t=1454s)
+
+
+### Download do APK
 - [Download APK](note_app_v1.0.0.apk)

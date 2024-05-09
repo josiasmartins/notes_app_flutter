@@ -59,6 +59,7 @@ build_flutter() {
 
 # Função para mover o APK para a pasta 'apks'
 move_apk() {
+    rm -rf apks/*
     mkdir -p apks
     echo "Variavel $1"
     mv build/app/outputs/flutter-apk/app-release.apk apks/notes_app_v$new_version.apk

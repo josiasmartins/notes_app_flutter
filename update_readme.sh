@@ -8,9 +8,17 @@ if [ -n "$apk_file" ]; then
     # Obtém o nome do arquivo sem o caminho completo
     apk_filename=$(basename "$apk_file")
     
-    # Atualiza o README.md com o link para o APK encontrado
-    echo "### Download do APK" > README.md
-    echo "- [Download APK]($apk_filename)" >> README.md
+    # Verifica se o README já contém uma seção para os downloads
+    if grep -q "### Download do APK" README.md; then
+        # Adiciona três linhas em branco antes de adicionar o novo link
+        sed -i '/### Download do APK/ a \\n\n\n' README.md
+        # Adiciona o novo link para o APK após as três linhas em branco
+        sed -i "/### Download do APK/,+3 a \- [Download APK]($apk_filename)" README.md
+    else
+        # Adiciona uma nova seção de downloads com o link para o APK
+        echo "### Download do APK" >> README.md
+        echo "- [Download APK]($apk_filename)" >> README.md
+    fi
 
     # Faz commit e push das alterações
     # git add README.md
