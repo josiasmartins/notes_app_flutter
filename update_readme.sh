@@ -21,9 +21,9 @@ if [ -n "$apk_file" ]; then
     fi
 
     # Faz commit e push das alterações
-    # git add README.md
-    # git commit -m "Adicionado link para o APK"
-    # git push origin master
+    git add README.md
+    git commit -m "Adicionado link para o APK"
+    git push origin master
 
     echo "Link para o APK adicionado com sucesso ao README.md."
 else

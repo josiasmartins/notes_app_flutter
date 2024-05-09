@@ -98,6 +98,11 @@ move_apk $new_version
 # Altera a versão do Flutter no pubspec.yaml
 change_flutter_version $new_version
 
+
+echo "Começando o update no readme"
+bash update_readme.sh
+echo "Terminado atualizacao no readme"
+
 #Cria uma nova tag no Git
 create_git_tag $new_version
 
