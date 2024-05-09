@@ -73,8 +73,13 @@ move_apk() {
 # Função para gerar uma nova tag no Git
 create_git_tag() {
     git add .
+    echo "adicionado na area de stage"
     git commit -m "Release version $new_version"
+    echo "commitado com mensagem: Release version $new_version"
     git tag -a v$new_version -m "Version $new_version"
+    echo "criado nova versão da tag: v$new_version"
+    git push -u origin v$new_version
+    echo "subido no repository a tag: v$new_version"
 }
 
 # Versão atual do app
@@ -92,7 +97,7 @@ move_apk $new_version
 # Altera a versão do Flutter no pubspec.yaml
 change_flutter_version $new_version
 
-# Cria uma nova tag no Git
-# create_git_tag $new_version
+#Cria uma nova tag no Git
+create_git_tag $new_version
 
 echo "Build, versioning, and tagging completed successfully. $new_version"
