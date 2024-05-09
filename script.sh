@@ -19,6 +19,33 @@ version=$(get_version)
 # Imprime os três números da versão
 echo "A versão do aplicativo de notas é: $version"
 
+
+# Função para incrementar a versão
+increment_version() {
+    # Chamando a função get_version para obter a versão atual
+    current_version=$(get_version)
+    
+    # Separando os três números da versão
+    major=$(echo "$current_version" | cut -d '.' -f 1)
+    minor=$(echo "$current_version" | cut -d '.' -f 2)
+    patch=$(echo "$current_version" | cut -d '.' -f 3)
+    
+    # Incrementando a parte de patch
+    ((patch++))
+    
+    # Construindo a nova versão
+    new_version="$major.$minor.$patch"
+    
+    # Atualizando o arquivo pubspec.yaml com a nova versão
+    sed -i "s/version: $current_version/version: $new_version/" pubspec.yaml
+    
+    # Imprimindo a nova versão
+    echo "Versão atualizada para: $new_version"
+}
+
+# Chamando a função para incrementar a versão
+increment_version
+
 # Função para gerar o build do Flutter
 build_flutter() {
     #flutter clean
@@ -34,7 +61,7 @@ build_flutter() {
 move_apk() {
     mkdir -p apks
     echo "Variavel $1"
-    mv build/app/outputs/flutter-apk/app-release.apk apks/notes_app_v$version.apk
+    mv build/app/outputs/flutter-apk/app-release.apk apks/notes_app_v$new_version.apk
     echo "Movido para a pasta apks"
 }
 
@@ -46,8 +73,8 @@ move_apk() {
 # Função para gerar uma nova tag no Git
 create_git_tag() {
     git add .
-    git commit -m "Release version $1"
-    git tag -a v$1 -m "Version $1"
+    git commit -m "Release version $new_version"
+    git tag -a v$new_version -m "Version $new_version"
 }
 
 # Versão atual do app
